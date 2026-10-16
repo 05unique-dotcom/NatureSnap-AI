@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NatureSnap AI</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#eef7ee;color:#183a1d}
+header{text-align:center;padding:30px 20px;background:#1f6b3a;color:#fff}
+header h1{margin:0;font-size:36px}
+main{max-width:800px;margin:30px auto;padding:20px}
+.card{background:#fff;padding:25px;border-radius:18px;box-shadow:0 5px 20px rgba(0,0,0,.1);text-align:center}
+input[type=file]{margin:20px 0;width:100%}
+button{background:#1f6b3a;color:#fff;border:none;padding:14px 25px;border-radius:10px;font-size:16px}
+#preview{max-width:100%;max-height:350px;margin:15px auto;border-radius:15px;display:none}
+#result{margin-top:20px;padding:15px;background:#f0f8f0;border-radius:12px;white-space:pre-wrap;text-align:left}
+#status{font-size:12px;color:#888;margin-top:10px}
+</style>
+</head>
+<body>
+<header>
+<h1>🌿 NatureSnap AI</h1>
+<p>Snap nature. Discover nature. Touch grass.</p>
+</header>
+<main>
+<div class="card">
+<h2>🔍 Discover Nature</h2>
+<p>Upload a photo of a plant, flower, bird, or other natural object.</p>
+<input type="file" id="imageInput" accept="image/*">
+<img id="preview" alt="preview">
+<button id="analyzeBtn">✨ Analyze with AI</button>
+<div id="result">Result yahan dikhega.</div>
+<div id="status">JS not loaded</div>
+</div>
+</main>
+<script>
+var imageInput = document.getElementById("imageInput");
+var preview = document.getElementById("preview");
+var result = document.getElementById("result");
+var statusEl = document.getElementById("status");
+
+statusEl.textContent = "JS loaded OK";
+
+window.onerror = function (msg) {
+  result.textContent = "JS error: " + msg;
+  };
+
+  imageInput.addEventListener("change", function () {
+    var file = imageInput.files[0];
+      if (file) {
+          preview.src = URL.createObjectURL(file);
+              preview.style.display = "block";
+                }
+                });
+
+                document.getElementById("analyzeBtn").addEventListener("click", async function () {
+                  if (!imageInput.files.length) {
+                      result.textContent = "Pehle ek photo chuno.";
+                          return;
+                            }
+                              result.textContent = "Analyzing photo...";
+                                try {
+                                    var fd = new FormData();
+                                        fd.append("image", imageInput.files[0]);
+                                            var res = await fetch("/api/analyze", { method: "POST", body: fd });
+                                                var data = await res.json();
+                                                    if (!res.ok) {
+                                                          result.textContent = "Error: " + (data.error || res.status);
+                                                                return;
+                                                                    }
+                                                                        result.textContent = data.analysis || JSON.stringify(data);
+                                                                          } catch (e) {
+                                                                              result.textContent = "AI error: " + e.message;
+                                                                                }
+                                                                                });
+                                                                                </script>
+                                                                                </body>
+                                                                                </html>
