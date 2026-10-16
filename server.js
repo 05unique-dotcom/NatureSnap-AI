@@ -43,7 +43,7 @@ const upload = multer({
                                                                                                       const imageUrl = `data:${req.file.mimetype};base64,${base64}`;
 
                                                                                                           const result = await hf.chatCompletion({
-                                                                                                                model: "Qwen/Qwen2.5-VL-3B-Instruct",
+                                                                                                                model: "Qwen/Qwen2.5-VL-7B-Instruct",
                                                                                                                       messages: [
                                                                                                                               {
                                                                                                                                         role: "user",
