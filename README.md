@@ -9,19 +9,19 @@ The project combines an intuitive botanical-inspired interface with AI-powered i
 **✨ Features**
 
 - **📸 Image Upload:** Upload photographs of plants, flowers, and other natural objects.
-- 🤖 AI-Powered Analysis: Generate image-based descriptions using the Groq API.
-- 🌱 Nature Insights: Explore possible identifications, scientific names, and interesting facts.
-- 🌍 Outdoor Activities: Discover simple activities that encourage outdoor exploration.
-- 🎨 Premium Botanical Design: A clean, responsive interface inspired by sage green and cream colors.
-- ⚡ Live Deployment: Access the application online through its hosted website.
+- **🤖 AI-Powered Analysis:** Generate image-based descriptions using the Groq API.
+- **🌱 Nature Insights:** Explore possible identifications, scientific names, and interesting facts.
+- **🌍 Outdoor Activities:** Discover simple activities that encourage outdoor exploration.
+- **🎨 Premium Botanical Design:** A clean, responsive interface inspired by sage green and cream colors.
+- **⚡ Live Deployment:** Access the application online through its hosted website.
 
-🛠️ Tech Stack
+**🛠️ Tech Stack**
 
-- Frontend: HTML, CSS, JavaScript
-- Backend: Node.js, Express.js
-- AI Integration: Groq API
-- Deployment: Render
-- Development Environment: GitHub Codespaces
+- **Frontend:** HTML, CSS, JavaScript
+- **Backend:** Node.js, Express.js
+- **AI Integration:** Groq API
+- **Deployment:** Render
+- **Development Environment:** GitHub Codespaces
 
 🚀 Getting Started
 
