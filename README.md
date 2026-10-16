@@ -23,11 +23,11 @@ The project combines an intuitive botanical-inspired interface with AI-powered i
 - **Deployment:** Render
 - **Development Environment:** GitHub Codespaces
 
-🚀 Getting Started
+**🚀 Getting Started**
 
 Follow these steps to run the project locally.
 
-Prerequisites
+**Prerequisites**
 
 Make sure you have the following:
 
@@ -35,7 +35,7 @@ Make sure you have the following:
 - A Groq API key
 - Git installed
 
-1. Clone the Repository
+**1. Clone the Repository**
 
 git clone https://github.com/05unique-dotcom/NatureSnap-AI.git
 cd NatureSnap-AI
