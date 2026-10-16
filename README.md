@@ -106,7 +106,7 @@ Suggestions, bug reports, and contributions are welcome. Feel free to open an is
 Please refer to the repository's "LICENSE" (LICENSE) file for the applicable license terms.
 
 **👨‍💻 Repository**
-GitHub: 05unique-dotcom/NatureSnap-AI
+**GitHub:** [05unique-dotcom/NatureSnap-AI](https://github.com/05unique-dotcom/NatureSnap-AI)
 
 ---
 
