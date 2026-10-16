@@ -8,7 +8,7 @@ The project combines an intuitive botanical-inspired interface with AI-powered i
 
 **✨ Features**
 
-- 📸 Image Upload: Upload photographs of plants, flowers, and other natural objects.
+**- 📸 Image Upload:** Upload photographs of plants, flowers, and other natural objects.
 - 🤖 AI-Powered Analysis: Generate image-based descriptions using the Groq API.
 - 🌱 Nature Insights: Explore possible identifications, scientific names, and interesting facts.
 - 🌍 Outdoor Activities: Discover simple activities that encourage outdoor exploration.
