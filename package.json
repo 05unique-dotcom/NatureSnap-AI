@@ -1,0 +1,28 @@
+{
+  "name": "naturesnap-ai",
+  "version": "1.0.0",
+  "description": "AI-powered nature explorer that helps people identify plants, flowers, birds, and other elements of nature.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/05unique-dotcom/NatureSnap-AI.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/05unique-dotcom/NatureSnap-AI/issues"
+  },
+  "homepage": "https://github.com/05unique-dotcom/NatureSnap-AI#readme",
+  "dependencies": {
+    "@huggingface/inference": "^4.13.32",
+    "dotenv": "^18.0.7",
+    "express": "^5.3.0",
+    "multer": "^2.4.0"
+  }
+}

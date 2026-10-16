@@ -1,2 +1,5 @@
 .env
 node_modules/git status
+
+node_modules/
+.env
