@@ -80,6 +80,15 @@ footer { text-align: center; padding: 8px 16px 28px; color: var(--muted); font-s
 #result strong { color: #234b35; font-weight: 750; }
 #result em { font-style: italic; }
 
+
+#result{white-space:normal}
+.ai-sec{background:#fff;border:1px solid #d9eadb;border-radius:14px;padding:14px 16px;margin:12px 0;text-align:left;box-shadow:0 2px 8px rgba(31,107,58,.06)}
+.ai-h{margin:0 0 10px;font-size:17px;color:#1f6b3a;display:flex;align-items:center;gap:8px}
+.ai-ic{font-size:20px}
+.ai-p{margin:6px 0;line-height:1.6}
+.ai-item{display:flex;flex-direction:column;gap:2px;padding:10px 12px;margin:8px 0;background:#f3faf4;border-left:4px solid #1f6b3a;border-radius:8px;line-height:1.55}
+.ai-label{font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#2f7d4a}
+.ai-value em{font-style:italic;color:#15512b}
 </style>
 </head>
 <body>
@@ -120,19 +129,69 @@ window.onerror = function (msg) {
 
                 
 function formatAnalysis(raw) {
-  const esc = s => String(s).replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;").replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;").replace(/'/g,"&#39;");
-  let t = esc(raw);
-  t = t.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
-  t = t.replace(/\*([^*\n]+)\*/g, "<em>$1</em>");
-  t = t.replace(/^### (.+)$/gm, "<h3>$1</h3>");
-  t = t.replace(/^## (.+)$/gm, "<h2>$1</h2>");
-  t = t.replace(/^\s*[-•]\s+(.+)$/gm, "• $1");
-  return t.split(/\n{2,}/).map(x => "<p>" +
-    x.replace(/\n/g,"<br>") + "</p>").join("");
+  const esc = s => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#39;");
+  const inline = s => esc(s)
+    .replace(/\*\*(.+?)\*\*/g,"<strong>$1</strong>")
+    .replace(/\*([^*\n]+?)\*/g,"<em>$1</em>")
+    .replace(/\*+/g,"");
+  const iconFor = t => {
+    if (/name|identif|species/i.test(t)) return "🌿";
+    if (/fact|know|trivia/i.test(t)) return "💡";
+    if (/activit|challenge|outdoor|try/i.test(t)) return "🚶";
+    if (/care|tip|habitat|where/i.test(t)) return "🌱";
+    return "📌";
+  };
+  const sections = [];
+  let cur = { title: "", intro: [], items: [] };
+  sections.push(cur);
+  String(raw).replace(/\r/g,"").split("\n").forEach(line => {
+    const l = line.trim();
+    if (!l) return;
+    const h = l.match(/^(?:#{1,4}\s*)?(?:\*\*)?\s*\d+[\).]\s*(.+?)\s*$/);
+    if (h) {
+      const title = h[1].replace(/\*+/g,"").replace(/:\s*$/,"").trim();
+      if (title.length <= 40 && !/[.!?]$/.test(title)) {
+        cur = { title: title, intro: [], items: [] };
+        sections.push(cur);
+        return;
+      }
+    }
+    const md = l.match(/^#{1,4}\s*(.+)$/);
+    if (md) {
+      cur = { title: md[1].replace(/\*+/g,"").replace(/:\s*$/,""), intro: [], items: [] };
+      sections.push(cur);
+      return;
+    }
+    const b = l.match(/^(?:[*\-•]\s+|\d+[\).]\s+)(.+)$/);
+    if (b) { cur.items.push(b[1]); return; }
+    if (/^\*\*.+?\*\*/.test(l)) { cur.items.push(l); return; }
+    cur.intro.push(l);
+  });
+  const item = t => {
+    let label = "", value = t;
+    let m = t.match(/^\*\*(.+?)\*\*\s*(.*)$/);
+    if (m) { label = m[1]; value = m[2]; }
+    else {
+      m = t.match(/^\*?([A-Za-z][A-Za-z '’\-]{1,28}?):\*?\s+(.+)$/);
+      if (m) { label = m[1]; value = m[2]; }
+    }
+    label = label.replace(/[*:]+\s*$/,"").replace(/^\*+/,"").trim();
+    value = value.replace(/^[:\s*]+/,"");
+    const sci = /scientific|latin|botanical/i.test(label);
+    const v = sci ? "<em>" + esc(value.replace(/\*+/g,"")) + "</em>" : inline(value);
+    return '<div class="ai-item">' +
+      (label ? '<span class="ai-label">' + esc(label) + '</span>' : '') +
+      '<span class="ai-value">' + v + '</span></div>';
+  };
+  return sections.map(sec => {
+    if (!sec.title && !sec.intro.length && !sec.items.length) return "";
+    let html = '<section class="ai-sec">';
+    if (sec.title) html += '<h3 class="ai-h"><span class="ai-ic">' + iconFor(sec.title) + '</span>' + esc(sec.title) + '</h3>';
+    sec.intro.forEach(x => { html += '<p class="ai-p">' + inline(x) + '</p>'; });
+    sec.items.forEach(x => { html += item(x); });
+    return html + '</section>';
+  }).join("");
 }
-
 document.getElementById("analyzeBtn").addEventListener("click", async function () {
                   if (!imageInput.files.length) {
                       result.textContent = "Pehle ek photo chuno.";
