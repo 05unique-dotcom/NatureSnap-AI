@@ -1,4 +1,4 @@
-🌿 NatureSnap AI
+**🌿 NatureSnap AI**
 
 Discover nature. Understand the world around you.
 
