@@ -1,12 +1,12 @@
 **🌿 NatureSnap AI**
 
-Discover nature. Understand the world around you.
+**Discover nature. Understand the world around you.**
 
 NatureSnap AI is an AI-powered nature discovery web application that helps users identify plants and other natural objects from photographs. Upload an image and receive an AI-generated description, interesting facts, and a simple nature-related activity.
 
 The project combines an intuitive botanical-inspired interface with AI-powered image understanding to make exploring nature more engaging and accessible.
 
-✨ Features
+**✨ Features**
 
 - 📸 Image Upload: Upload photographs of plants, flowers, and other natural objects.
 - 🤖 AI-Powered Analysis: Generate image-based descriptions using the Groq API.
