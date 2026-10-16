@@ -23,6 +23,9 @@ The project combines an intuitive botanical-inspired interface with AI-powered i
 - **Deployment:** Render
 - **Development Environment:** GitHub Codespaces
 
+🚀 Live Demo
+Try NatureSnap AI: [Open the Live Website](https://naturesnap-ai.onrender.com/)
+
 **🚀 Getting Started**
 
 Follow these steps to run the project locally.
