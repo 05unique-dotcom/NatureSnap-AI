@@ -1,7 +1,7 @@
 {
   "name": "naturesnap-ai",
   "version": "1.0.0",
-  "description": "AI-powered nature explorer that helps people identify plants, flowers, birds, and other elements of nature.",
+  "description": "Upload a nature photo and receive an AI-generated identification, facts, and outdoor activity.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -11,14 +11,26 @@
     "type": "git",
     "url": "git+https://github.com/05unique-dotcom/NatureSnap-AI.git"
   },
-  "keywords": [],
+  "keywords": [
+    "nature",
+    "plant-identification",
+    "ai",
+    "groq",
+    "nodejs",
+    "express",
+    "javascript",
+    "image-analysis"
+  ],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "type": "commonjs",
   "bugs": {
     "url": "https://github.com/05unique-dotcom/NatureSnap-AI/issues"
   },
   "homepage": "https://github.com/05unique-dotcom/NatureSnap-AI#readme",
+  "engines": {
+    "node": ">=18"
+  },
   "dependencies": {
     "@huggingface/inference": "^4.13.32",
     "dotenv": "^18.0.7",

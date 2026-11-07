@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests when available
+        run: |
+          if node -e "const p=require('./package.json'); process.exit(p.scripts?.test && !p.scripts.test.includes('no test specified') ? 0 : 1)"; then
+            npm test
+          else
+            echo "No project test suite configured; skipping npm test."
+          fi
+
+      - name: Check server syntax
+        run: node --check server.js
