@@ -59,6 +59,10 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "index.html"));
 });
 
+app.get("/discovery-store.js", (req, res) => {
+  res.sendFile(path.join(__dirname, "discovery-store.js"));
+});
+
 app.post("/api/analyze", analyzeLimiter, upload.single("image"), async (req, res) => {
   try {
     if (!req.file) {
@@ -133,6 +137,10 @@ app.use((error, req, res, next) => {
   next();
 });
 
-app.listen(PORT, "0.0.0.0", () => {
-  console.log(`NatureSnap AI server running on port ${PORT}`);
-});
+if (require.main === module) {
+  app.listen(PORT, "0.0.0.0", () => {
+    console.log(`NatureSnap AI server running on port ${PORT}`);
+  });
+}
+
+module.exports = app;

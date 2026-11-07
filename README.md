@@ -14,6 +14,8 @@ Upload a nature photo and get a short, AI-generated report with an identificatio
 - **AI-powered analysis:** Send the image to the Groq API for a generated report.
 - **Nature insights:** See a possible common or scientific name and three short facts.
 - **Outdoor activity:** Get one simple activity related to the subject.
+- **Session history:** Review nature analyses created during your current session.
+- **Saved discoveries:** Save favorite findings to a permanent personal collection, complete with image thumbnails and full reports.
 - **Responsive interface:** Use the sage-green web interface on desktop or mobile.
 
 ## Tech Stack
@@ -75,6 +77,20 @@ npm start
 
 Open [http://localhost:3000](http://localhost:3000).
 
+### Running Tests
+
+Execute the automated test suite covering discovery storage, API endpoints, error handling, and security:
+
+```bash
+npm test
+```
+
+Check server syntax:
+
+```bash
+node --check server.js
+```
+
 ## How to Use
 
 1. Select a photograph.
@@ -120,13 +136,47 @@ The endpoint returns an error message if no image is supplied, the upload is too
 
 NatureSnap AI aims to make learning about nature interactive, accessible, and enjoyable through AI-assisted discovery.
 
+## Image History & Saved Discoveries
+
+NatureSnap AI allows you to track and save your nature observations directly in the browser:
+
+### 1. Session History
+- Every completed analysis is automatically recorded in your session history.
+- The **History** tab displays previously analyzed subjects with thumbnails, extracted names, summary snippets, and analysis timestamps.
+- Click **View Details** on any history item to inspect the full AI report.
+- Clear session history at any time using the **Clear** button.
+
+### 2. Saved Discoveries
+- Click **Save Discovery** on any active analysis or history card to preserve it in your personal collection.
+- Saved discoveries persist locally across browser sessions and reloads using `localStorage`.
+- The **Saved** tab lists all saved discoveries with image references, dates, and summaries.
+- Click **Remove** to delete an entry from your saved collection.
+- Accidental duplicate saves are automatically detected and prevented.
+
+### Data Storage Architecture & Format
+Saved entries preserve both the image reference and the complete generated report in a structured format:
+
+```json
+{
+  "id": "nat_1731000000000_abc123",
+  "title": "Monarch Butterfly (Danaus plexippus)",
+  "summary": "A large, migratory butterfly famous for its vibrant orange and black wings...",
+  "report": "### 1) Name: Monarch Butterfly...",
+  "imageReference": "data:image/jpeg;base64,...",
+  "createdAt": "2026-11-07T18:15:00.000Z",
+  "savedAt": "2026-11-07T18:15:05.000Z"
+}
+```
+
+Image references use lightweight client-side thumbnails (~5–8 KB) to prevent excessive storage consumption while preserving visual identity. If an image reference is unavailable, missing, or corrupted, a botanical leaf placeholder is displayed gracefully without broken UI elements.
+
 ## Future Improvements
 
 Potential enhancements include:
 
 - More structured plant identification reports
 - Improved scientific-name formatting
-- Image history and saved discoveries
+- Export and import for saved nature discoveries
 - Additional information about plant care and habitats
 - Accessibility and performance improvements
 - Support for more categories of natural objects
@@ -137,7 +187,11 @@ Potential enhancements include:
 .
 ├── .env.example             # Environment variable template
 ├── index.html               # Frontend interface and browser logic
+├── discovery-store.js       # Session history and saved discoveries store
 ├── server.js                # Express server and Groq API integration
+├── test/                    # Automated test suite (unit, integration, security)
+│   ├── discovery-store.test.js
+│   └── server.test.js
 ├── package.json             # Project metadata, scripts, and dependencies
 ├── docs/screenshots/        # Location for real project screenshots
 ├── .github/                 # Issue, pull request, and CI configuration
