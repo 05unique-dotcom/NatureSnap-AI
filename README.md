@@ -1,92 +1,125 @@
-**🌿 NatureSnap AI**
+# NatureSnap AI
 
-**Discover nature. Understand the world around you.**
+[![MIT License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![Node.js](https://img.shields.io/badge/Node.js-CommonJS-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
+[![Express](https://img.shields.io/badge/Express-5-000000?logo=express&logoColor=white)](https://expressjs.com/)
+[![Groq](https://img.shields.io/badge/Groq-API-f55036)](https://groq.com/)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Open%20site-234b35)](https://naturesnap-ai.onrender.com/)
 
-NatureSnap AI is an AI-powered nature discovery web application that helps users identify plants and other natural objects from photographs. Upload an image and receive an AI-generated description, interesting facts, and a simple nature-related activity.
+Upload a nature photo and get a short, AI-generated report with an identification, facts, and an outdoor activity.
 
-The project combines an intuitive botanical-inspired interface with AI-powered image understanding to make exploring nature more engaging and accessible.
+## Features
 
-**✨ Features**
+- **Image upload:** Upload a plant, flower, bird, animal, or other natural object.
+- **AI-powered analysis:** Send the image to the Groq API for a generated report.
+- **Nature insights:** See a possible common or scientific name and three short facts.
+- **Outdoor activity:** Get one simple activity related to the subject.
+- **Responsive interface:** Use the sage-green web interface on desktop or mobile.
 
-- **📸 Image Upload:** Upload photographs of plants, flowers, and other natural objects.
-- **🤖 AI-Powered Analysis:** Generate image-based descriptions using the Groq API.
-- **🌱 Nature Insights:** Explore possible identifications, scientific names, and interesting facts.
-- **🌍 Outdoor Activities:** Discover simple activities that encourage outdoor exploration.
-- **🎨 Premium Botanical Design:** A clean, responsive interface inspired by sage green and cream colors.
-- **⚡ Live Deployment:** Access the application online through its hosted website.
+## Tech Stack
 
-**🛠️ Tech Stack**
-
-- **Frontend:** HTML, CSS, JavaScript
-- **Backend:** Node.js, Express.js
-- **AI Integration:** Groq API
+- **Frontend:** HTML, CSS, and browser JavaScript
+- **Backend:** Node.js and Express
+- **AI integration:** Groq chat completions API with `qwen/qwen3.8-27b`
+- **Uploads:** Multer memory storage
 - **Deployment:** Render
-- **Development Environment:** GitHub Codespaces
 
-**🚀 Live Demo**
-Try NatureSnap AI: [Open the Live Website](https://naturesnap-ai.onrender.com/)
+## Live Demo
 
-**🚀 Getting Started**
+[Open NatureSnap AI](https://naturesnap-ai.onrender.com/)
 
-Follow these steps to run the project locally.
+The free Render instance may take **30–60 seconds** to wake up on the first visit.
 
-**Prerequisites**
+## Screenshots
 
-Make sure you have the following:
+Add real screenshots to `docs/screenshots/home.png` and `docs/screenshots/result.png`. A placeholder folder is included, but this repository does not contain generated screenshots.
 
-- Node.js and npm installed
+### Home
+
+![NatureSnap AI home screen](docs/screenshots/home.png)
+
+### Result
+
+![NatureSnap AI result screen](docs/screenshots/result.png)
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js and npm
 - A Groq API key
-- Git installed
+- Git
 
-**1. Clone the Repository**
+### Installation
 
-git clone  https://github.com/05unique-dotcom/NatureSnap-AI.git
+```bash
+git clone https://github.com/05unique-dotcom/NatureSnap-AI.git
 cd NatureSnap-AI
-
-**2. Install Dependencies**
-
 npm install
+```
 
-**3. Configure Environment Variables**
+Create `.env` in the project root:
 
-Create a ".env" file in the project root and add the environment variable expected by your backend:
+```env
+GROQ_API_KEY=your_key
+```
 
-GROQ_API_KEY=your_groq_api_key
+Never commit `.env` or expose the API key publicly.
 
-Important: Use the exact variable name referenced in "server.js". If your backend uses a different name, configure ".env" accordingly.
+Start the application:
 
-Never commit your ".env" file or expose your API key publicly.
-
-**4. Start the Application**
-
+```bash
 npm start
+```
 
-Open the local URL shown by your server, typically:
+Open [http://localhost:3000](http://localhost:3000).
 
-http://localhost:3000
+## How to Use
 
-**📖 How to Use**
-
-1. Open **NatureSnap AI** in your browser.
-2. Select a photograph from your device.
-3. Preview the selected image.
-4. Click **Analyze with AI.**
-5. Read the generated nature report and explore the facts.
+1. Select a photograph.
+2. Preview the image.
+3. Click **Analyze with AI**.
+4. Read the generated nature report.
 
 AI-generated identifications are suggestions and may not always be accurate. Verify important botanical information with reliable sources.
 
-**🔐 Security**
+## How It Works
+
+1. The browser uploads an image to the Express backend.
+2. The backend checks that an image is present and within the upload limit.
+3. The backend converts the image to a data URL and sends it to the Groq vision-capable model.
+4. The response is returned as a short analysis and formatted in the browser.
+
+## API / Endpoints
+
+### `GET /`
+
+Serves the NatureSnap AI web interface.
+
+### `POST /api/analyze`
+
+Accepts a multipart form upload using the field name `image`. Returns JSON in the form:
+
+```json
+{
+  "analysis": "AI-generated nature report"
+}
+```
+
+The endpoint returns an error message if no image is supplied, the upload is too large, the API key is unavailable, or the upstream analysis fails.
+
+## Security
 
 - Store API keys in environment variables.
-- Keep ".env" excluded from version control using ".gitignore".
+- Keep `.env` excluded from version control using `.gitignore`.
 - Never expose private credentials in frontend JavaScript or public repositories.
-- Validate uploaded images and enforce suitable file-size limits on the backend.
+- Backend upload validation and size limits help reduce unsafe or excessive uploads.
 
-**🌱 Project Goals**
+## Project Goals
 
-NatureSnap AI aims to make learning about nature interactive, accessible, and enjoyable. It encourages curiosity about plants and the natural world through AI-assisted discovery.
+NatureSnap AI aims to make learning about nature interactive, accessible, and enjoyable through AI-assisted discovery.
 
-**🔮 Future Improvements**
+## Future Improvements
 
 Potential enhancements include:
 
@@ -97,17 +130,32 @@ Potential enhancements include:
 - Accessibility and performance improvements
 - Support for more categories of natural objects
 
-**🤝 Contributing**
+## Project Structure
 
-Suggestions, bug reports, and contributions are welcome. Feel free to open an issue or submit a pull request to help improve the project.
+```text
+.
+├── .env.example             # Environment variable template
+├── index.html               # Frontend interface and browser logic
+├── server.js                # Express server and Groq API integration
+├── package.json             # Project metadata, scripts, and dependencies
+├── docs/screenshots/        # Location for real project screenshots
+├── .github/                 # Issue, pull request, and CI configuration
+├── CONTRIBUTING.md          # Contribution and pull request guidance
+├── CODE_OF_CONDUCT.md       # Community conduct expectations
+├── SECURITY.md              # Private vulnerability reporting guidance
+└── LICENSE                  # MIT License
+```
 
-**📄 License**
+## Contributing
 
-Please refer to the repository's "LICENSE" (LICENSE) file for the applicable license terms.
+Suggestions, bug reports, and contributions are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for setup and pull request guidance.
 
-**👨‍💻 Repository**
-**GitHub:** [05unique-dotcom/NatureSnap-AI](https://github.com/05unique-dotcom/NatureSnap-AI)
+## License
 
----
+Licensed under the MIT License. See [LICENSE](LICENSE).
 
-**Built with curiosity, AI, and a love for nature. 🌿**
+## Repository
+
+[05unique-dotcom/NatureSnap-AI](https://github.com/05unique-dotcom/NatureSnap-AI)
+
+Built with curiosity, AI, and a love for nature.
