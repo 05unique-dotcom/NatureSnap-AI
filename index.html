@@ -14,6 +14,8 @@
   --ink: #25372c;
   --muted: #68776b;
   --line: #e1e8dc;
+  --accent-gold: #c98a2c;
+  --danger: #a83838;
 }
 * { box-sizing: border-box; }
 body {
@@ -44,6 +46,58 @@ main {
 }
 h2 { margin-top: 0; color: var(--forest); letter-spacing: -.025em; }
 p { overflow-wrap: anywhere; }
+
+/* Tabs Navigation */
+.nav-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+  border-bottom: 2px solid var(--line);
+  padding-bottom: 12px;
+  overflow-x: auto;
+}
+.nav-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  width: auto;
+  min-height: 44px;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  padding: 8px 16px;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  box-shadow: none;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+.nav-tab:hover {
+  background: #edf3eb;
+  color: var(--forest);
+}
+.nav-tab.active {
+  background: var(--forest);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(35, 75, 53, 0.2);
+}
+.nav-badge {
+  display: inline-block;
+  padding: 2px 7px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border-radius: 999px;
+  background: #e2ece0;
+  color: var(--forest);
+}
+.nav-tab.active .nav-badge {
+  background: rgba(255, 255, 255, 0.28);
+  color: #fff;
+}
+
 input[type="file"] {
   display: block; width: 100%; margin: 18px 0;
   padding: 12px; border: 1px dashed #9eb49c;
@@ -64,6 +118,12 @@ button {
 }
 button:hover { background: var(--sage-dark); }
 button:active { transform: scale(.99); }
+button:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none;
+}
+
 #result {
   margin-top: 22px; padding: 20px;
   border: 1px solid var(--line); border-radius: 18px;
@@ -80,7 +140,6 @@ footer { text-align: center; padding: 8px 16px 28px; color: var(--muted); font-s
 #result strong { color: #234b35; font-weight: 750; }
 #result em { font-style: italic; }
 
-
 #result{white-space:normal}
 .ai-sec{background:#fff;border:1px solid #d9eadb;border-radius:14px;padding:14px 16px;margin:12px 0;text-align:left;box-shadow:0 2px 8px rgba(31,107,58,.06)}
 .ai-h{margin:0 0 10px;font-size:17px;color:#1f6b3a;display:flex;align-items:center;gap:8px}
@@ -90,11 +149,254 @@ footer { text-align: center; padding: 8px 16px 28px; color: var(--muted); font-s
 .ai-label{font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#2f7d4a}
 .ai-value em{font-style:italic;color:#15512b}
 
-/*ai-fix3*/
 #preview:not([src]),#preview[src=""]{display:none!important}
 #result:has(.ai-sec){background:transparent;border:0;box-shadow:none;padding:0}
 .ai-h{align-items:flex-start;line-height:1.3}
 .ai-ic{flex:0 0 auto;line-height:1.3}
+
+/* Save Action Bar */
+.save-action-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 18px;
+  padding: 14px 16px;
+  background: #f4f9f2;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+}
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: auto;
+  min-height: 42px;
+  padding: 10px 18px;
+  background: var(--sage-dark);
+  color: white;
+  font-size: 0.92rem;
+  border-radius: 12px;
+  box-shadow: 0 3px 8px rgba(66, 107, 80, 0.2);
+}
+.btn-secondary:hover { background: var(--forest); }
+.btn-subtle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  width: auto;
+  min-height: 38px;
+  padding: 6px 14px;
+  background: transparent;
+  color: var(--muted);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  font-size: 0.85rem;
+  box-shadow: none;
+}
+.btn-subtle:hover {
+  background: #f0f4ee;
+  color: var(--forest);
+}
+.btn-danger {
+  color: var(--danger);
+  border-color: #f0d5d5;
+}
+.btn-danger:hover {
+  background: #fdf2f2;
+  color: #8c2626;
+}
+
+/* Panel Headers */
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.panel-desc {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+/* Discoveries List & Cards */
+.discoveries-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.discovery-card {
+  display: flex;
+  gap: 14px;
+  padding: 14px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  box-shadow: 0 2px 10px rgba(35, 75, 53, 0.04);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.discovery-card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(35, 75, 53, 0.08);
+}
+.thumb-wrap {
+  width: 84px;
+  height: 84px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #eef3ec;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.thumb-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  margin: 0;
+  border-radius: 12px;
+}
+.thumb-placeholder {
+  font-size: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background: #eef3ec;
+}
+.discovery-content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.discovery-title {
+  margin: 0 0 4px;
+  font-size: 1.02rem;
+  font-weight: 700;
+  color: var(--forest);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.discovery-summary {
+  margin: 0 0 6px;
+  font-size: 0.86rem;
+  color: var(--muted);
+  line-height: 1.45;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.discovery-meta {
+  font-size: 0.76rem;
+  color: #839485;
+  margin-bottom: 8px;
+}
+.discovery-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.discovery-actions button {
+  width: auto;
+  min-height: 34px;
+  padding: 5px 12px;
+  font-size: 0.82rem;
+  border-radius: 9px;
+  box-shadow: none;
+}
+
+/* Empty State */
+.empty-state {
+  text-align: center;
+  padding: 42px 20px;
+  background: #f9fbf8;
+  border: 1px dashed #c8d8c6;
+  border-radius: 18px;
+  color: var(--muted);
+}
+.empty-icon {
+  font-size: 42px;
+  margin-bottom: 12px;
+}
+.empty-title {
+  margin: 0 0 6px;
+  font-size: 1.12rem;
+  font-weight: 700;
+  color: var(--forest);
+}
+.empty-desc {
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+/* Detail View */
+.detail-view {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 20px;
+  margin-top: 10px;
+}
+.detail-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.detail-image {
+  max-height: 320px;
+  width: 100%;
+  object-fit: contain;
+  border-radius: 14px;
+  background: #f0f3eb;
+  margin: 14px auto;
+}
+.detail-title {
+  font-size: 1.35rem;
+  color: var(--forest);
+  margin: 0 0 6px;
+}
+.detail-meta {
+  font-size: 0.82rem;
+  color: var(--muted);
+  margin-bottom: 14px;
+}
+
+/* Toast */
+.toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: var(--forest);
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  box-shadow: 0 8px 24px rgba(35, 75, 53, 0.25);
+  z-index: 1000;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.25s, transform 0.25s;
+  pointer-events: none;
+}
+.toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
 </style>
 </head>
 <body>
@@ -104,36 +406,186 @@ footer { text-align: center; padding: 8px 16px 28px; color: var(--muted); font-s
 </header>
 <main>
 <div class="card">
-<h2>🔍 Discover Nature</h2>
-<p>Upload a photo of a plant, flower, bird, or other natural object.</p>
-<input type="file" id="imageInput" accept="image/*">
-<img id="preview" alt="preview">
-<button id="analyzeBtn">✨ Analyze with AI</button>
-<div id="result">Your AI-generated nature report will appear here.</div>
-<div id="status">JS not loaded</div>
+  <!-- Navigation Tabs -->
+  <nav class="nav-tabs" role="tablist" aria-label="Sections">
+    <button id="tabDiscover" class="nav-tab active" role="tab" aria-selected="true" aria-controls="panelDiscover">
+      🌿 Discover
+    </button>
+    <button id="tabHistory" class="nav-tab" role="tab" aria-selected="false" aria-controls="panelHistory">
+      ⏱️ History <span id="historyBadge" class="nav-badge" aria-label="0 analyses">0</span>
+    </button>
+    <button id="tabSaved" class="nav-tab" role="tab" aria-selected="false" aria-controls="panelSaved">
+      ⭐ Saved <span id="savedBadge" class="nav-badge" aria-label="0 saved">0</span>
+    </button>
+  </nav>
+
+  <!-- Discover Panel -->
+  <section id="panelDiscover" role="tabpanel" aria-labelledby="tabDiscover">
+    <h2>🔍 Discover Nature</h2>
+    <p>Upload a photo of a plant, flower, bird, or other natural object.</p>
+    <input type="file" id="imageInput" accept="image/*">
+    <img id="preview" alt="preview">
+    <button id="analyzeBtn">✨ Analyze with AI</button>
+    <div id="saveActionBar" class="save-action-bar" style="display: none;">
+      <span id="saveActionText" style="font-size: 0.88rem; color: var(--forest); font-weight: 600;">🌿 Analysis ready</span>
+      <button id="saveCurrentBtn" class="btn-secondary">⭐ Save Discovery</button>
+    </div>
+    <div id="result">Your AI-generated nature report will appear here.</div>
+  </section>
+
+  <!-- Session History Panel -->
+  <section id="panelHistory" role="tabpanel" aria-labelledby="tabHistory" style="display: none;">
+    <div class="panel-header">
+      <div>
+        <h2>⏱️ Session History</h2>
+        <p class="panel-desc">Analyses created during your current session.</p>
+      </div>
+      <button id="clearHistoryBtn" class="btn-subtle" title="Clear session history">Clear</button>
+    </div>
+    <div id="historyList" class="discoveries-list"></div>
+  </section>
+
+  <!-- Saved Discoveries Panel -->
+  <section id="panelSaved" role="tabpanel" aria-labelledby="tabSaved" style="display: none;">
+    <div class="panel-header">
+      <div>
+        <h2>⭐ Saved Discoveries</h2>
+        <p class="panel-desc">Your permanently saved nature collection.</p>
+      </div>
+    </div>
+    <div id="savedList" class="discoveries-list"></div>
+  </section>
+
+  <!-- Detail Review View -->
+  <section id="detailView" class="detail-view" style="display: none;" aria-label="Discovery Detail">
+    <div class="detail-nav">
+      <button id="detailBackBtn" class="btn-subtle">← Back</button>
+      <button id="detailSaveBtn" class="btn-secondary">⭐ Save</button>
+    </div>
+    <div class="detail-body">
+      <h2 id="detailTitle" class="detail-title"></h2>
+      <div id="detailMeta" class="detail-meta"></div>
+      <div id="detailImageWrap">
+        <img id="detailImage" class="detail-image" alt="Discovery Image">
+      </div>
+      <div id="detailReport"></div>
+    </div>
+  </section>
+
+  <div id="status">JS not loaded</div>
 </div>
 </main>
+
+<footer>
+  NatureSnap AI &mdash; Discover and protect our natural world.
+</footer>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<script src="/discovery-store.js"></script>
 <script>
 var imageInput = document.getElementById("imageInput");
 var preview = document.getElementById("preview");
 var result = document.getElementById("result");
 var statusEl = document.getElementById("status");
+var analyzeBtn = document.getElementById("analyzeBtn");
+var saveActionBar = document.getElementById("saveActionBar");
+var saveCurrentBtn = document.getElementById("saveCurrentBtn");
+var saveActionText = document.getElementById("saveActionText");
+
+var tabDiscover = document.getElementById("tabDiscover");
+var tabHistory = document.getElementById("tabHistory");
+var tabSaved = document.getElementById("tabSaved");
+
+var panelDiscover = document.getElementById("panelDiscover");
+var panelHistory = document.getElementById("panelHistory");
+var panelSaved = document.getElementById("panelSaved");
+var detailView = document.getElementById("detailView");
+
+var historyList = document.getElementById("historyList");
+var savedList = document.getElementById("savedList");
+var historyBadge = document.getElementById("historyBadge");
+var savedBadge = document.getElementById("savedBadge");
+var clearHistoryBtn = document.getElementById("clearHistoryBtn");
+
+var detailBackBtn = document.getElementById("detailBackBtn");
+var detailSaveBtn = document.getElementById("detailSaveBtn");
+var detailTitle = document.getElementById("detailTitle");
+var detailMeta = document.getElementById("detailMeta");
+var detailImage = document.getElementById("detailImage");
+var detailReport = document.getElementById("detailReport");
+var toastEl = document.getElementById("toast");
 
 statusEl.style.display = "none";
 
+var currentAnalysisEntry = null;
+var currentThumbnailData = null;
+var activeTab = "discover";
+var detailSourceTab = "discover";
+var detailCurrentEntry = null;
+
 window.onerror = function (msg) {
   result.textContent = "JS error: " + msg;
-  };
+};
 
-  imageInput.addEventListener("change", function () {
-    var file = imageInput.files[0];
-      if (file) {
-          preview.src = URL.createObjectURL(file);
-              preview.style.display = "block";
-                }
-                });
+function showToast(message) {
+  if (!toastEl) return;
+  toastEl.textContent = message;
+  toastEl.classList.add("show");
+  setTimeout(function () {
+    toastEl.classList.remove("show");
+  }, 2600);
+}
 
-                
+function updateBadges() {
+  if (window.NatureSnapStore) {
+    var historyCount = NatureSnapStore.HistoryStore.getAll().length;
+    var savedCount = NatureSnapStore.SavedStore.getAll().length;
+    historyBadge.textContent = historyCount;
+    historyBadge.setAttribute("aria-label", historyCount + " analyses");
+    savedBadge.textContent = savedCount;
+    savedBadge.setAttribute("aria-label", savedCount + " saved");
+  }
+}
+
+function switchTab(tabName) {
+  activeTab = tabName;
+  detailView.style.display = "none";
+
+  tabDiscover.classList.toggle("active", tabName === "discover");
+  tabDiscover.setAttribute("aria-selected", tabName === "discover");
+  panelDiscover.style.display = tabName === "discover" ? "block" : "none";
+
+  tabHistory.classList.toggle("active", tabName === "history");
+  tabHistory.setAttribute("aria-selected", tabName === "history");
+  panelHistory.style.display = tabName === "history" ? "block" : "none";
+
+  tabSaved.classList.toggle("active", tabName === "saved");
+  tabSaved.setAttribute("aria-selected", tabName === "saved");
+  panelSaved.style.display = tabName === "saved" ? "block" : "none";
+
+  if (tabName === "history") renderHistoryList();
+  if (tabName === "saved") renderSavedList();
+  updateBadges();
+}
+
+tabDiscover.addEventListener("click", function () { switchTab("discover"); });
+tabHistory.addEventListener("click", function () { switchTab("history"); });
+tabSaved.addEventListener("click", function () { switchTab("saved"); });
+
+imageInput.addEventListener("change", function () {
+  var file = imageInput.files[0];
+  if (file) {
+    preview.src = URL.createObjectURL(file);
+    preview.style.display = "block";
+    saveActionBar.style.display = "none";
+    currentThumbnailData = null;
+    generateThumbnail(file).then(function (thumb) {
+      currentThumbnailData = thumb;
+    });
+  }
+});
+
 function resizeImage(file) {
   return new Promise(function (resolve) {
     if (!file || !file.type || file.type.indexOf("image/") !== 0) { resolve(file); return; }
@@ -150,6 +602,35 @@ function resizeImage(file) {
       c.toBlob(function (b) { URL.revokeObjectURL(url); resolve(b || file); }, "image/jpeg", 0.85);
     };
     img.onerror = function () { URL.revokeObjectURL(url); resolve(file); };
+    img.src = url;
+  });
+}
+
+function generateThumbnail(file, maxDimension) {
+  maxDimension = maxDimension || 160;
+  return new Promise(function (resolve) {
+    if (!file || !file.type || file.type.indexOf("image/") !== 0) {
+      resolve(null);
+      return;
+    }
+    var url = URL.createObjectURL(file);
+    var img = new Image();
+    img.onload = function () {
+      var w = img.naturalWidth, h = img.naturalHeight;
+      var scale = Math.min(1, maxDimension / Math.max(w, h));
+      var c = document.createElement("canvas");
+      c.width = Math.max(1, Math.round(w * scale));
+      c.height = Math.max(1, Math.round(h * scale));
+      var ctx = c.getContext("2d");
+      ctx.drawImage(img, 0, 0, c.width, c.height);
+      var thumbDataUrl = c.toDataURL("image/jpeg", 0.72);
+      URL.revokeObjectURL(url);
+      resolve(thumbDataUrl);
+    };
+    img.onerror = function () {
+      URL.revokeObjectURL(url);
+      resolve(null);
+    };
     img.src = url;
   });
 }
@@ -218,26 +699,308 @@ function formatAnalysis(raw) {
     return html + '</section>';
   }).join("");
 }
-document.getElementById("analyzeBtn").addEventListener("click", async function () {
-                  if (!imageInput.files.length) {
-                      result.textContent = "Pehle ek photo chuno.";
-                          return;
-                            }
-                              result.textContent = "Analyzing photo...";
-                                try {
-                                    var fd = new FormData();
-                                        fd.append("image", await resizeImage(imageInput.files[0]), "photo.jpg");
-                                            var res = await fetch("/api/analyze", { method: "POST", body: fd });
-                                                var data = await res.json();
-                                                    if (!res.ok) {
-                                                          result.textContent = "Error: " + (data.error || res.status);
-                                                                return;
-                                                                    }
-                                                                        result.innerHTML = formatAnalysis(data.analysis || JSON.stringify(data));
-                                                                          } catch (e) {
-                                                                              result.textContent = "AI error: " + e.message;
-                                                                                }
-                                                                                });
-                                                                                </script>
-                                                                                </body>
-                                                                                </html>
+
+function updateSaveCurrentButtonState() {
+  if (!currentAnalysisEntry || !window.NatureSnapStore) return;
+  var isSaved = NatureSnapStore.SavedStore.isSaved(currentAnalysisEntry);
+  if (isSaved) {
+    saveCurrentBtn.textContent = "✓ Saved";
+    saveCurrentBtn.disabled = true;
+    saveActionText.textContent = "⭐ Saved in your collection";
+  } else {
+    saveCurrentBtn.textContent = "⭐ Save Discovery";
+    saveCurrentBtn.disabled = false;
+    saveActionText.textContent = "🌿 Analysis ready";
+  }
+}
+
+saveCurrentBtn.addEventListener("click", function () {
+  if (!currentAnalysisEntry || !window.NatureSnapStore) return;
+  var res = NatureSnapStore.SavedStore.save(currentAnalysisEntry);
+  if (res.success) {
+    showToast("🌿 Saved to discoveries!");
+    updateSaveCurrentButtonState();
+    updateBadges();
+  } else if (res.reason === "DUPLICATE") {
+    showToast("Already in your saved discoveries.");
+    updateSaveCurrentButtonState();
+  } else {
+    showToast("Could not save discovery.");
+  }
+});
+
+analyzeBtn.addEventListener("click", async function () {
+  if (!imageInput.files.length) {
+    result.textContent = "Please select an image first.";
+    return;
+  }
+  result.textContent = "Analyzing photo...";
+  saveActionBar.style.display = "none";
+  analyzeBtn.disabled = true;
+
+  try {
+    if (!currentThumbnailData) {
+      currentThumbnailData = await generateThumbnail(imageInput.files[0]);
+    }
+    var fd = new FormData();
+    fd.append("image", await resizeImage(imageInput.files[0]), "photo.jpg");
+    var res = await fetch("/api/analyze", { method: "POST", body: fd });
+    var data = await res.json();
+    if (!res.ok) {
+      result.textContent = "Error: " + (data.error || res.status);
+      return;
+    }
+
+    var reportContent = data.analysis || JSON.stringify(data);
+    result.innerHTML = formatAnalysis(reportContent);
+
+    if (window.NatureSnapStore) {
+      currentAnalysisEntry = NatureSnapStore.createDiscovery({
+        report: reportContent,
+        imageReference: currentThumbnailData
+      });
+      NatureSnapStore.HistoryStore.add(currentAnalysisEntry);
+      updateBadges();
+      saveActionBar.style.display = "flex";
+      updateSaveCurrentButtonState();
+    }
+  } catch (e) {
+    result.textContent = "AI error: " + e.message;
+  } finally {
+    analyzeBtn.disabled = false;
+  }
+});
+
+function createThumbnailElement(imageRef, title) {
+  var wrap = document.createElement("div");
+  wrap.className = "thumb-wrap";
+  if (imageRef) {
+    var img = document.createElement("img");
+    img.src = imageRef;
+    img.alt = title || "Discovery thumbnail";
+    img.loading = "lazy";
+    img.onerror = function () {
+      wrap.innerHTML = '<span class="thumb-placeholder" aria-hidden="true">🌿</span>';
+    };
+    wrap.appendChild(img);
+  } else {
+    wrap.innerHTML = '<span class="thumb-placeholder" aria-hidden="true">🌿</span>';
+  }
+  return wrap;
+}
+
+function renderHistoryList() {
+  if (!window.NatureSnapStore) return;
+  var history = NatureSnapStore.HistoryStore.getAll();
+  historyList.innerHTML = "";
+
+  if (!history.length) {
+    historyList.innerHTML =
+      '<div class="empty-state">' +
+      '<div class="empty-icon" aria-hidden="true">📜</div>' +
+      '<div class="empty-title">No analyses yet this session</div>' +
+      '<p class="empty-desc">Upload and analyze a nature photo to view your session history here.</p>' +
+      '</div>';
+    return;
+  }
+
+  history.forEach(function (item) {
+    var card = document.createElement("article");
+    card.className = "discovery-card";
+
+    var thumb = createThumbnailElement(item.imageReference, item.title);
+    card.appendChild(thumb);
+
+    var content = document.createElement("div");
+    content.className = "discovery-content";
+
+    var title = document.createElement("h3");
+    title.className = "discovery-title";
+    title.textContent = item.title;
+    content.appendChild(title);
+
+    var summary = document.createElement("p");
+    summary.className = "discovery-summary";
+    summary.textContent = item.summary;
+    content.appendChild(summary);
+
+    var meta = document.createElement("div");
+    meta.className = "discovery-meta";
+    meta.textContent = "Analyzed: " + NatureSnapStore.formatTimestamp(item.createdAt);
+    content.appendChild(meta);
+
+    var actions = document.createElement("div");
+    actions.className = "discovery-actions";
+
+    var viewBtn = document.createElement("button");
+    viewBtn.className = "btn-subtle";
+    viewBtn.textContent = "👁️ View Details";
+    viewBtn.onclick = function () { openDetailView(item, "history"); };
+    actions.appendChild(viewBtn);
+
+    var isSaved = NatureSnapStore.SavedStore.isSaved(item);
+    var saveBtn = document.createElement("button");
+    saveBtn.className = isSaved ? "btn-subtle" : "btn-secondary";
+    saveBtn.textContent = isSaved ? "✓ Saved" : "⭐ Save";
+    saveBtn.disabled = isSaved;
+    saveBtn.onclick = function () {
+      var res = NatureSnapStore.SavedStore.save(item);
+      if (res.success) {
+        showToast("🌿 Saved to discoveries!");
+        renderHistoryList();
+        updateBadges();
+      }
+    };
+    actions.appendChild(saveBtn);
+
+    content.appendChild(actions);
+    card.appendChild(content);
+    historyList.appendChild(card);
+  });
+}
+
+function renderSavedList() {
+  if (!window.NatureSnapStore) return;
+  var saved = NatureSnapStore.SavedStore.getAll();
+  savedList.innerHTML = "";
+
+  if (!saved.length) {
+    savedList.innerHTML =
+      '<div class="empty-state">' +
+      '<div class="empty-icon" aria-hidden="true">⭐</div>' +
+      '<div class="empty-title">No saved discoveries yet</div>' +
+      '<p class="empty-desc">Save analyses from your discoveries or session history to keep them here permanently.</p>' +
+      '</div>';
+    return;
+  }
+
+  saved.forEach(function (item) {
+    var card = document.createElement("article");
+    card.className = "discovery-card";
+
+    var thumb = createThumbnailElement(item.imageReference, item.title);
+    card.appendChild(thumb);
+
+    var content = document.createElement("div");
+    content.className = "discovery-content";
+
+    var title = document.createElement("h3");
+    title.className = "discovery-title";
+    title.textContent = item.title;
+    content.appendChild(title);
+
+    var summary = document.createElement("p");
+    summary.className = "discovery-summary";
+    summary.textContent = item.summary;
+    content.appendChild(summary);
+
+    var meta = document.createElement("div");
+    meta.className = "discovery-meta";
+    meta.textContent = "Saved: " + NatureSnapStore.formatTimestamp(item.savedAt || item.createdAt);
+    content.appendChild(meta);
+
+    var actions = document.createElement("div");
+    actions.className = "discovery-actions";
+
+    var viewBtn = document.createElement("button");
+    viewBtn.className = "btn-subtle";
+    viewBtn.textContent = "👁️ View Details";
+    viewBtn.onclick = function () { openDetailView(item, "saved"); };
+    actions.appendChild(viewBtn);
+
+    var removeBtn = document.createElement("button");
+    removeBtn.className = "btn-subtle btn-danger";
+    removeBtn.textContent = "🗑️ Remove";
+    removeBtn.onclick = function () {
+      NatureSnapStore.SavedStore.remove(item.id);
+      showToast("Discovery removed from saved.");
+      renderSavedList();
+      updateBadges();
+      if (currentAnalysisEntry && currentAnalysisEntry.id === item.id) {
+        updateSaveCurrentButtonState();
+      }
+    };
+    actions.appendChild(removeBtn);
+
+    content.appendChild(actions);
+    card.appendChild(content);
+    savedList.appendChild(card);
+  });
+}
+
+clearHistoryBtn.addEventListener("click", function () {
+  if (confirm("Clear all session history?")) {
+    NatureSnapStore.HistoryStore.clear();
+    renderHistoryList();
+    updateBadges();
+    showToast("Session history cleared.");
+  }
+});
+
+function openDetailView(entry, fromTab) {
+  detailCurrentEntry = entry;
+  detailSourceTab = fromTab || "discover";
+
+  panelDiscover.style.display = "none";
+  panelHistory.style.display = "none";
+  panelSaved.style.display = "none";
+  detailView.style.display = "block";
+
+  detailTitle.textContent = entry.title || "Nature Discovery";
+  var metaText = "Analyzed: " + NatureSnapStore.formatTimestamp(entry.createdAt);
+  if (entry.savedAt) {
+    metaText += " • Saved: " + NatureSnapStore.formatTimestamp(entry.savedAt);
+  }
+  detailMeta.textContent = metaText;
+
+  if (entry.imageReference) {
+    detailImage.src = entry.imageReference;
+    detailImage.style.display = "block";
+    detailImage.onerror = function () { detailImage.style.display = "none"; };
+  } else {
+    detailImage.style.display = "none";
+  }
+
+  detailReport.innerHTML = formatAnalysis(entry.report);
+
+  updateDetailSaveButton();
+}
+
+function updateDetailSaveButton() {
+  if (!detailCurrentEntry || !window.NatureSnapStore) return;
+  var isSaved = NatureSnapStore.SavedStore.isSaved(detailCurrentEntry);
+  if (isSaved) {
+    detailSaveBtn.textContent = "🗑️ Remove from Saved";
+    detailSaveBtn.className = "btn-subtle btn-danger";
+  } else {
+    detailSaveBtn.textContent = "⭐ Save Discovery";
+    detailSaveBtn.className = "btn-secondary";
+  }
+}
+
+detailSaveBtn.addEventListener("click", function () {
+  if (!detailCurrentEntry || !window.NatureSnapStore) return;
+  var isSaved = NatureSnapStore.SavedStore.isSaved(detailCurrentEntry);
+  if (isSaved) {
+    NatureSnapStore.SavedStore.remove(detailCurrentEntry.id);
+    showToast("Discovery removed from saved.");
+  } else {
+    NatureSnapStore.SavedStore.save(detailCurrentEntry);
+    showToast("🌿 Saved to discoveries!");
+  }
+  updateDetailSaveButton();
+  updateBadges();
+  if (currentAnalysisEntry && currentAnalysisEntry.id === detailCurrentEntry.id) {
+    updateSaveCurrentButtonState();
+  }
+});
+
+detailBackBtn.addEventListener("click", function () {
+  switchTab(detailSourceTab);
+});
+
+// Initial load
+updateBadges();
+</script>
+</body>
+</html>
