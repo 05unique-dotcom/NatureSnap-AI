@@ -32,15 +32,16 @@ The free Render instance may take **30–60 seconds** to wake up on the first vi
 
 ## Screenshots
 
-Add real screenshots to `docs/screenshots/home.png` and `docs/screenshots/result.png`. A placeholder folder is included, but this repository does not contain generated screenshots.
+Actual screenshots are available in `docs/screenshots/`.
 
 ### Home
 
-![NatureSnap AI home screen](docs/screenshots/home.png)
+![NatureSnap AI home screen](docs/screenshots/Home.jpg)
 
 ### Result
 
-![NatureSnap AI result screen](docs/screenshots/result.png)
+![NatureSnap AI result screenshot 1](docs/screenshots/Result-1.jpg)
+![NatureSnap AI result screenshot 2](docs/screenshots/Result-2.jpg)
 
 ## Getting Started
 
