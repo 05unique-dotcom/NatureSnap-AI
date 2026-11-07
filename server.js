@@ -8,7 +8,7 @@ const path = require("path");
 const app = express();
 const PORT = process.env.PORT || 3000;
 const MODEL = "qwen/qwen3.8-27b";
-const MAX_IMAGE_SIZE = 3 * 1024 * 1024;
+const MAX_IMAGE_SIZE = 8 * 1024 * 1024;
 const ALLOWED_IMAGE_TYPES = new Set(["image/gif", "image/jpeg", "image/png", "image/webp"]);
 
 const upload = multer({
@@ -53,6 +53,7 @@ function hasValidImageSignature(buffer, mimetype) {
 }
 
 app.use(helmet({ contentSecurityPolicy: false }));
+app.set("trust proxy", 1);
 
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "index.html"));
@@ -120,7 +121,7 @@ app.post("/api/analyze", analyzeLimiter, upload.single("image"), async (req, res
 
 app.use((error, req, res, next) => {
   if (error instanceof multer.MulterError && error.code === "LIMIT_FILE_SIZE") {
-    return res.status(413).json({ error: "Image too large. Please use a photo under 3 MB." });
+    return res.status(413).json({ error: "Image too large. Please use a photo under 8 MB." });
   }
   if (error && error.code === "INVALID_FILE_TYPE") {
     return res.status(400).json({ error: "Please upload a valid JPG, PNG, GIF, or WebP image." });
